@@ -133,10 +133,10 @@
             "request": "launch",
             "stopOnEntry": false,
             "pythonPath": "${config:python.pythonPath}",
-            "program": "${file}",
+            "program": "/usr/local/bin/flask",
             "cwd": "${workspaceRoot}",
             "env": {
-                "FLASK_APP": "${workspaceRoot}/quickstart/app.py"
+                "FLASK_APP": "${workspaceRoot}/app.py"
             },
             "args": [
                 "run",
