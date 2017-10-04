@@ -4,43 +4,28 @@ import random
 import time
 app = Flask(__name__)
 
-#stream like
-#output = io.BytesIO() 
+FRAME_RATE = 60 #60 Frames per second
 
 def gen():
-    #this object returned a generator
+    #returned a generator
     while True:
+      time.sleep(1/FRAME_RATE)
       for i in images_bytes:
           yield (b'--jpgboundary'
           b'Content-type: image/jpeg\r\n\r\n' + 
           i + b'\r\n')
 
-def gen_random():
-  #why generator effected only?
-  while True:
-    time.sleep(0.04)
-    yield (b'--jpgboundary'
-          b'Content-type: image/jpeg\r\n\r\n' + 
-          images_bytes[random.randint(0,len(images_bytes)-1)] + b'\r\n') 
-
 @app.route('/')
 def index():
-    print("index")
     return render_template('index.html')
 
 @app.route('/source.mjpg')
 def feed_stream():
     print("Response")
     #Response is a object
-    #may detect generator then decide what's end of response context
-    #streaming
-    #only one stream available
-    return Response(gen_random(),mimetype='multipart/x-mixed-replace; boundary=--jpgboundary') 
-
-@app.route('/source2.mjpg')
-def feed_stream_2():
+    #Streaming Contents
+    #http://flask.pocoo.org/docs/0.12/patterns/streaming/
     return Response(gen(),mimetype='multipart/x-mixed-replace; boundary=--jpgboundary') 
-
 
 if __name__ == '__main__':
 
