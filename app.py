@@ -1,6 +1,5 @@
 from flask import Flask, render_template, Response
-import io,cv2
-import random
+import io
 import time
 app = Flask(__name__)
 
