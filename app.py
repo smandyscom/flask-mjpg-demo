@@ -20,7 +20,6 @@ def index():
 
 @app.route('/source.mjpg')
 def feed_stream():
-    print("Response")
     #Response is a object
     #Streaming Contents
     #http://flask.pocoo.org/docs/0.12/patterns/streaming/
